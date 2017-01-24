@@ -1,0 +1,33 @@
+#
+version: '2'
+
+services:
+
+  # Base de Datos.
+  orcl:
+    image: 152.139.124.245:8123/admin/orcl-desa-cn:v1
+    shm_size: 4g
+    ports:
+      - "32769:5500"
+      - "32768:8080"
+      - "32770:1521"
+
+  start_dependencies:
+    image: dadarek/wait-for-dependencies
+    depends_on:
+      - orcl
+    command: orcl:8080
+
+  # WLS
+  wls-desa-cn:
+    image: 152.139.124.245:8123/admin/wls-desa-cn:v2
+    depends_on:
+      - orcl
+    links:
+      - orcl:orcl
+    ports:
+      - "8001:8001"
+    extra_hosts:
+      - "200.14.166.208:osb.sb"
+      - "200.14.166.247:otd-priv"
+      - "200.14.166.247:osb12c"

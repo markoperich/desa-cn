@@ -20,7 +20,7 @@ services:
 
   # WLS
   wls-desa-cn:
-    image: 152.139.124.245:8123/admin/wls-desa-cn:v2
+    image: 152.139.124.245:8123/admin/wls-desa-cn:v3
     depends_on:
       - orcl
     links:

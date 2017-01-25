@@ -12,7 +12,7 @@ services:
       - "32768:8080"
       - "32770:1521"
 
-  start_dependencies:
+  start_orcl:
     image: dadarek/wait-for-dependencies
     depends_on:
       - orcl
@@ -27,6 +27,7 @@ services:
       - orcl:orcl
     ports:
       - "8001:8001"
+      - "8453:8453"
     extra_hosts:
       - "200.14.166.208:osb.sb"
       - "200.14.166.247:otd-priv"
